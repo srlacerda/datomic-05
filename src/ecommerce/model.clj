@@ -28,7 +28,8 @@
 (def Venda
   {:venda/id                          java.util.UUID
    (s/optional-key :venda/produto)    Produto
-   (s/optional-key :venda/quantidade) s/Int})
+   (s/optional-key :venda/quantidade) s/Int
+   (s/optional-key :venda/situacao) s/Str})
 
 (s/defn novo-produto :- Produto
   ([nome slug preco]
