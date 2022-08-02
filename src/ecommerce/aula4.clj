@@ -29,3 +29,14 @@
 (pprint (count (db.venda/todas-inclusive-canceladas (d/db conn))))
 
 (pprint (count (db.venda/canceladas (d/db conn))))
+
+(pprint @(db.produto/adiciona-ou-altera! conn [{:produto/id    (:produto/id primeiro)
+                                                :produto/preco 300M}]))
+(pprint @(db.produto/adiciona-ou-altera! conn [{:produto/id    (:produto/id primeiro)
+                                                :produto/preco 250M}]))
+(pprint @(db.produto/adiciona-ou-altera! conn [{:produto/id    (:produto/id primeiro)
+                                                :produto/preco 277M}]))
+(pprint @(db.produto/adiciona-ou-altera! conn [{:produto/id    (:produto/id primeiro)
+                                                :produto/preco 21M}]))
+
+(pprint (db.produto/historido-de-precos (d/db conn) (:produto/id primeiro)))
