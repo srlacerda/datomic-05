@@ -51,7 +51,7 @@
   (d/q '[:find ?id
          :where [?venda :venda/id ?id]
          [?venda :venda/situacao "cancelada"]]
-        db))
+       db))
 
 (defn altera-situacao! [conn venda-id situacao]
   (d/transact conn [{:venda/id       venda-id
@@ -70,10 +70,11 @@
        (sort-by first)))
 
 (defn historico-geral [db instante-desde]
-  (->> (d/q '[:find ?instante ?situacao ?id
-              :in $
-              :where [?venda :venda/id ?id]
-              [?venda :venda/situacao ?situacao ?tx]
-              [?tx :db/txInstant ?instante]]
-            (d/since db instante-desde))
-       (sort-by first)))
+  (let [filtrado (d/since db instante-desde)]
+    (->> (d/q '[:find ?instante ?situacao ?id
+                :in $ $filtrado
+                :where [$ ?venda :venda/id ?id]
+                [$filtrado ?venda :venda/situacao ?situacao ?tx]
+                [$filtrado ?tx :db/txInstant ?instante]]
+              db filtrado)
+         (sort-by first))))

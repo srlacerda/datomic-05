@@ -37,7 +37,15 @@
 (pprint (count (db.venda/canceladas (d/db conn))))
 
 (pprint (db.venda/historico-geral (d/db conn) #inst "2011-08-02T22:25:39.121-00:00"))
-(pprint (db.venda/historico-geral (d/db conn) #inst "2022-08-02T22:25:39.177-00:00"))
+(pprint (db.venda/historico-geral (d/db conn) #inst "2022-08-02T22:57:12.299-00:00"))
+
+;8654844 :venda/id 1 15 true
+;8654844 :venda/situacao "nova" 15 true
+;8654844 :venda/situacao "nova" 20 false
+;8654844 :venda/situacao "cancelada" 20 true
+;17
+;:venda/id 1
+
 
 
 
