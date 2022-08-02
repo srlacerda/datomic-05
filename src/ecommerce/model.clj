@@ -1,5 +1,6 @@
 (ns ecommerce.model
-  (:require [schema.core :as s]))
+  (:require [schema.core :as s])
+  (:import (org.h2.mvstore.db MVSecondaryIndex)))
 
 (defn uuid [] (java.util.UUID/randomUUID))
 
@@ -24,6 +25,10 @@
    (s/optional-key :produto/variacao)      [Variacao]
    (s/optional-key :produto/visualizacoes) s/Int})
 
+(def Venda
+  {:venda/id                          java.util.UUID
+   (s/optional-key :venda/produto)    Produto
+   (s/optional-key :venda/quantidade) s/Int})
 
 (s/defn novo-produto :- Produto
   ([nome slug preco]
